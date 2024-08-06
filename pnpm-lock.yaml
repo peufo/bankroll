@@ -17,6 +17,9 @@ importers:
       '@prisma/client':
         specifier: 5.18.0
         version: 5.18.0(prisma@5.18.0)
+      dayjs:
+        specifier: ^1.11.12
+        version: 1.11.12
       fuma:
         specifier: ^0.5.1
         version: 0.5.1(@sveltejs/kit@2.5.20(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.5(@types/node@22.1.0)))(svelte@4.2.18)(vite@5.3.5(@types/node@22.1.0)))(@types/node@22.1.0)(prisma@5.18.0)(svelte@4.2.18)(typescript@5.5.4)

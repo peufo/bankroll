@@ -37,6 +37,7 @@
 		"@lucia-auth/adapter-prisma": "^4.0.1",
 		"@mdi/js": "^7.4.47",
 		"@prisma/client": "5.18.0",
+		"dayjs": "^1.11.12",
 		"fuma": "^0.5.1",
 		"lucia": "^3.2.0",
 		"oslo": "^1.2.1",

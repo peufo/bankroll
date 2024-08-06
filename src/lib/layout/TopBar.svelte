@@ -4,9 +4,9 @@
   export let user: import('lucia').User | null = null
 </script>
 
-<div class="flex gap-2 p-2 border-b items-center pl-4">
+<div class="flex gap-2 p-2 border-b border-base-300 items-center pl-4">
   <a href="/">
-    <h1 class="text-xl">Bankroll</h1>
+    <h1 class="text-2xl">Bankroll</h1>
   </a>
 
   <div class="grow"></div>
