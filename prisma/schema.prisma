@@ -14,7 +14,7 @@ model User {
   email    String    @unique
   password String?
 
-  posts Post[]
+  bankrolls Bankroll[]
 }
 
 model Session {
@@ -24,53 +24,31 @@ model Session {
   user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
-model Post {
+model Bankroll {
+  id        String   @id
+  ownerId   String
+  owner     User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  logs      Log[]
+  createdAt DateTime @default(now())
+}
+
+model Log {
   id String @id @default(cuid())
 
-  title   String
-  content String @db.Text
+  start    DateTime?
+  end      DateTime?
+  sold     Int
+  type     LogType
+  position Int?
+  players  Int?
+  comment  String?   @db.Text
 
-  // BASIC TYPES REUIRED
-  isFavourite     Boolean
-  likeCount       Int
-  writingAt       DateTime
-  writingDuration DateTime
-
-  // BASIC TYPES OPTIONAL
-  isInteressing   Boolean?
-  viewCounter     Int?
-  publishedAt     DateTime?
-  publishedAtTime DateTime?
-
-  // RELATION
-  typeId String
-  type   PostType @relation(fields: [typeId], references: [id])
-
-  // RELATIONS
-  tags Tag[]
-
-  // ENUM
-  publication PostPublication
-
-  authorId String
-  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  bankrollId String
+  bankroll   Bankroll @relation(fields: [bankrollId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  createdAt  DateTime @default(now())
 }
 
-enum PostPublication {
-  private
-  friends
-  public
-}
-
-model PostType {
-  id    String @id @default(cuid())
-  name  String @unique
-  icon  String @db.Text
-  posts Post[]
-}
-
-model Tag {
-  id    String @id @default(cuid())
-  name  String @unique
-  posts Post[]
+enum LogType {
+  cash
+  tours
 }
