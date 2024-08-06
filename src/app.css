@@ -1,3 +1,57 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+  .menu-item {
+    @apply flex items-center gap-3 px-3 py-[5px] cursor-pointer hover:bg-base-200 rounded-md whitespace-nowrap text-ellipsis;
+  }
+  .menu-item.active {
+    @apply bg-base-300/80;
+  }
+  .menu-item.disabled {
+    @apply cursor-default bg-base-200/50 hover:bg-base-200/50;
+  }
+
+  .title {
+    @apply text-xl font-semibold text-base-content/70;
+  }
+
+  .title-sm {
+    @apply text-xs font-bold text-base-content/60;
+  }
+
+  .title-md {
+    @apply font-semibold text-base-content/60;
+  }
+
+  .btn-primary {
+    @apply text-white;
+  }
+
+  .btn-primary svg {
+    @apply fill-primary-content;
+  }
+
+  .tiptap .ProseMirror-selectednode {
+    @apply outline outline-2 outline-primary rounded;
+  }
+
+  .suggestion {
+    @apply border rounded px-2 mx-1 shadow text-sm !whitespace-nowrap inline-block;
+  }
+}
+
+mark {
+  border-radius: 0.25em;
+  box-decoration-break: clone;
+  padding: 0.125em 0.5rem;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
