@@ -19,8 +19,8 @@
   }
 
   function getDuration(_start: Date, _end: Date, _addADay: boolean): string {
-    const minutes = dayjs(dayjs(end).add(+addADay, 'day')).diff(
-      start,
+    const minutes = dayjs(dayjs(_end).add(+_addADay, 'day')).diff(
+      _start,
       'minutes'
     )
     const hours = Math.floor(minutes / 60)
