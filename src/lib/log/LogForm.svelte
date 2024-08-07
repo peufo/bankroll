@@ -19,7 +19,7 @@
     <InputNumber
       key="sold"
       label="Solde"
-      input={{ autofocus: true }}
+      input={{ autofocus: true, min: -10_000_000 }}
       value={log.sold}
     />
     <InputSelect
