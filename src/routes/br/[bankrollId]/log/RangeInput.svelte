@@ -11,6 +11,9 @@
   export let start = defaultStart
   export let end = defaultEnd
 
+  if (start === undefined) start = defaultStart
+  if (end === undefined) end = defaultStart
+
   $: addADay = end.getHours() < start.getHours()
 
   export function setRange(range?: Partial<{ start: Date; end: Date }> | null) {

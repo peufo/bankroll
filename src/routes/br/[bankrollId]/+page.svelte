@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mdiPlus } from '@mdi/js'
-  import { Icon, urlParam } from 'fuma'
+  import { Icon } from 'fuma'
   import { BankrollCard } from '$lib/bankroll'
   import { LogsList } from '$lib/log'
   import TabGroupBy from './TabGroupBy.svelte'
@@ -9,7 +9,7 @@
 </script>
 
 <div class="mx-auto max-w-md p-4">
-  <BankrollCard bankroll={data.bankroll}>
+  <BankrollCard bankroll={data.bankroll} sold={data.sold}>
     <a
       slot="actions"
       href="/br/{data.bankroll.id}/log"

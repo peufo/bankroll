@@ -12,7 +12,7 @@
     style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr))"
   >
     {#each data.bankrolls as bankroll}
-      <BankrollCard {bankroll} isClickable />
+      <BankrollCard {bankroll} sold={data.solds[bankroll.id]} isClickable />
     {/each}
   </div>
 

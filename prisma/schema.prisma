@@ -38,13 +38,13 @@ model Bankroll {
 model Log {
   id String @id @default(cuid())
 
-  start    DateTime?
-  end      DateTime?
+  start    DateTime
+  end      DateTime
   sold     Int
   type     LogType
   position Int?
   players  Int?
-  comment  String?   @db.Text
+  comment  String?  @db.Text
 
   bankrollId String
   bankroll   Bankroll @relation(fields: [bankrollId], references: [id], onUpdate: Cascade, onDelete: Cascade)

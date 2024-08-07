@@ -4,8 +4,8 @@ import { LOG_TYPE } from '$lib/constant'
 
 export const modelLog = {
   sold: z.number(),
-  start: z.date().nullish(),
-  end: z.date().nullish(),
+  start: z.date(),
+  end: z.date(),
   type: z.enum(toTuple(LOG_TYPE)),
   position: z.number().nullish(),
   players: z.number().nullish(),

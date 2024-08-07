@@ -1,8 +1,10 @@
 <script lang="ts">
   import type { Bankroll } from '@prisma/client'
   import BankrollState from './BankrollState.svelte'
+  import type { BankrollSold } from '.'
 
   export let bankroll: Bankroll
+  export let sold: BankrollSold
   export let isClickable = false
 </script>
 
@@ -14,11 +16,11 @@
     </div>
 
     <div class="flex gap-4 overflow-auto">
-      <BankrollState range="total" />
+      <BankrollState name="Total" value={sold.total} />
       <div class="border-r border-base-100" />
-      <BankrollState range="month" />
+      <BankrollState name="Mois" value={sold.lastMonth} />
       <div class="border-r border-base-100" />
-      <BankrollState range="week" />
+      <BankrollState name="Semaine" value={sold.lastWeek} />
     </div>
 
     <slot />
