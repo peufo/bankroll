@@ -11,3 +11,8 @@ export const modelLog = {
   players: z.number().nullish(),
   comment: z.string().nullish(),
 } satisfies ZodObj<Omit<Prisma.LogCreateInput, 'bankroll'>>
+
+export const modelLogUpdate = {
+  id: z.string(),
+  ...modelLog,
+} satisfies ZodObj<Prisma.LogUpdateInput>
