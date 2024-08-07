@@ -22,7 +22,7 @@
 </script>
 
 <div class="flex flex-col gap-4">
-  {#each logs as log}
+  {#each logs as log (log.id)}
     <a
       href="/br/{log.bankrollId}/log/{log.id}"
       class="bg-base-200 card-bordered flex flex-col gap-2 px-3 py-2 rounded"

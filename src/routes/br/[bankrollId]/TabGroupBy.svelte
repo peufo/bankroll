@@ -1,5 +1,11 @@
 <script lang="ts">
   import { urlParam } from 'fuma'
+
+  const groups = [
+    { key: 'week', label: 'Semaine' },
+    { key: 'month', label: 'Mois' },
+    { key: 'year', label: 'Année' },
+  ]
 </script>
 
 <div role="tablist" class="tabs tabs-boxed -translate-y-3">
@@ -13,35 +19,16 @@
   >
     Tous
   </a>
-  <a
-    role="tab"
-    href={$urlParam.with({ groupBy: 'week' })}
-    class="tab"
-    class:tab-active={$urlParam.hasValue('groupBy', 'week')}
-    data-sveltekit-noscroll
-    data-sveltekit-replacestate
-  >
-    Semaine
-  </a>
-  <a
-    role="tab"
-    href={$urlParam.with({ groupBy: 'month' })}
-    class="tab"
-    class:tab-active={$urlParam.hasValue('groupBy', 'month')}
-    data-sveltekit-noscroll
-    data-sveltekit-replacestate
-  >
-    Mois
-  </a>
-
-  <a
-    role="tab"
-    href={$urlParam.with({ groupBy: 'year' })}
-    class="tab"
-    class:tab-active={$urlParam.hasValue('groupBy', 'year')}
-    data-sveltekit-noscroll
-    data-sveltekit-replacestate
-  >
-    Année
-  </a>
+  {#each groups as { key, label }}
+    <a
+      role="tab"
+      href={$urlParam.with({ groupBy: key })}
+      class="tab"
+      class:tab-active={$urlParam.hasValue('groupBy', key)}
+      data-sveltekit-noscroll
+      data-sveltekit-replacestate
+    >
+      {label}
+    </a>
+  {/each}
 </div>
