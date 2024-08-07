@@ -3,9 +3,10 @@
   import BankrollState from './BankrollState.svelte'
 
   export let bankroll: Bankroll
+  export let isClickable = false
 </script>
 
-<a href="/br/{bankroll.id}" class="card bg-base-300 shadow-md">
+<div class="card bg-base-300 shadow-md relative">
   <div class="card-body">
     <div class="flex">
       <h2 class="card-title">{bankroll.name}</h2>
@@ -22,4 +23,8 @@
 
     <slot />
   </div>
-</a>
+
+  {#if isClickable}
+    <a class="absolute inset-0" href="/br/{bankroll.id}">{' '}</a>
+  {/if}
+</div>
