@@ -5,10 +5,12 @@
   import dayjs from 'dayjs'
   import relativeTime from 'dayjs/plugin/relativeTime'
   import 'dayjs/locale/fr-ch'
+  import { urlParam } from 'fuma'
   dayjs.locale('fr-ch')
   dayjs.extend(relativeTime)
 
   export let logs: Log[]
+  export let logCount: number
 
   function getDuration(start: Date, end: Date): string {
     const minutes = dayjs(end).diff(start, 'minutes')
@@ -57,4 +59,15 @@
       {/if}
     </div>
   {/each}
+
+  {#if logs.length < logCount}
+    <a
+      class="btn"
+      href={$urlParam.with({ take: +($urlParam.get('take') || 0) + 50 })}
+      data-sveltekit-noscroll
+      data-sveltekit-replacestate
+    >
+      Afficher plus ({logs.length} / {logCount})
+    </a>
+  {/if}
 </div>

@@ -3,6 +3,7 @@
   import { Icon, urlParam } from 'fuma'
   import { BankrollCard } from '$lib/bankroll'
   import { LogsList } from '$lib/log'
+  import TabGroupBy from './TabGroupBy.svelte'
 
   export let data
 </script>
@@ -19,42 +20,8 @@
 
     <div class="divider"></div>
 
-    <div role="tablist" class="tabs tabs-boxed -translate-y-3">
-      <a
-        role="tab"
-        href={$urlParam.without('groupBy')}
-        class="tab"
-        class:tab-active={!$urlParam.has('groupBy')}
-      >
-        Tous
-      </a>
-      <a
-        role="tab"
-        href={$urlParam.with({ groupBy: 'week' })}
-        class="tab"
-        class:tab-active={$urlParam.hasValue('groupBy', 'week')}
-      >
-        Semaine
-      </a>
-      <a
-        role="tab"
-        href={$urlParam.with({ groupBy: 'month' })}
-        class="tab"
-        class:tab-active={$urlParam.hasValue('groupBy', 'month')}
-      >
-        Mois
-      </a>
+    <TabGroupBy />
 
-      <a
-        role="tab"
-        href={$urlParam.with({ groupBy: 'year' })}
-        class="tab"
-        class:tab-active={$urlParam.hasValue('groupBy', 'year')}
-      >
-        Année
-      </a>
-    </div>
-
-    <LogsList logs={data.bankroll.logs} />
+    <LogsList logs={data.bankroll.logs} logCount={data.bankroll._count.logs} />
   </BankrollCard>
 </div>
