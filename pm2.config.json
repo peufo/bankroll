@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "bankroll",
+      "script": "./build/index.js",
+      "args": "-r dotenv/config"
+    }
+  ]
+}
