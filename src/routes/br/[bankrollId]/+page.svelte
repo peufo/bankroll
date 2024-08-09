@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { mdiPlus } from '@mdi/js'
+  import { mdiPencilOutline, mdiPlus } from '@mdi/js'
   import { Icon, urlParam } from 'fuma'
   import { BankrollCard } from '$lib/bankroll'
   import { LogsList, type LogsGroupBy } from '$lib/log'
@@ -14,13 +14,14 @@
 
 <div class="mx-auto max-w-md p-4">
   <BankrollCard bankroll={data.bankroll} sold={data.sold}>
-    <a
-      slot="actions"
-      href="/br/{data.bankroll.id}/log"
-      class="btn btn-square ml-auto"
-    >
-      <Icon path={mdiPlus} />
-    </a>
+    <div class="flex gap-2 ml-auto" slot="actions">
+      <a href="/br/{data.bankroll.id}/edit" class="btn btn-square">
+        <Icon path={mdiPencilOutline} />
+      </a>
+      <a href="/br/{data.bankroll.id}/log" class="btn btn-square">
+        <Icon path={mdiPlus} />
+      </a>
+    </div>
 
     <div class="divider"></div>
 
