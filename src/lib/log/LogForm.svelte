@@ -33,14 +33,15 @@
       <Icon path={mdiPlusMinusVariant} />
     </button>
   </div>
+
+  <RangeInput start={log.start || undefined} end={log.end || undefined} />
+
   <InputSelect
     key="type"
     label="Type"
     options={LOG_TYPE}
     bind:value={log.type}
   />
-
-  <RangeInput start={log.start || undefined} end={log.end || undefined} />
 
   {#if log.type === 'tours'}
     <div class="grid grid-cols-2 gap-2" transition:slide>
