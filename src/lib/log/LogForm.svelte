@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { Form, InputNumber, InputSelect, InputTextarea } from 'fuma'
+  import { Form, Icon, InputNumber, InputSelect, InputTextarea } from 'fuma'
   import RangeInput from '../../routes/br/[bankrollId]/log/RangeInput.svelte'
   import { slide } from 'svelte/transition'
   import type { Log } from '@prisma/client'
   import { LOG_TYPE } from '$lib/constant'
   import { page } from '$app/stores'
   import { modelLog } from '$lib/models'
+  import { mdiPlusMinusVariant } from '@mdi/js'
 
   export let log: Partial<Log> = { type: 'cash' }
 </script>
@@ -15,20 +16,29 @@
   model={modelLog}
   data={log}
 >
-  <div class="grid grid-cols-2 gap-2">
+  <div class="flex gap-2 items-end">
     <InputNumber
       key="sold"
       label="Solde"
-      input={{ autofocus: true, min: -10_000_000 }}
-      value={log.sold}
+      input={{ autofocus: true }}
+      bind:value={log.sold}
+      class="grow"
     />
-    <InputSelect
-      key="type"
-      label="Type"
-      options={LOG_TYPE}
-      bind:value={log.type}
-    />
+
+    <button
+      type="button"
+      class="btn btn-square"
+      on:click={() => (log.sold = -(log.sold || 0))}
+    >
+      <Icon path={mdiPlusMinusVariant} />
+    </button>
   </div>
+  <InputSelect
+    key="type"
+    label="Type"
+    options={LOG_TYPE}
+    bind:value={log.type}
+  />
 
   <RangeInput start={log.start || undefined} end={log.end || undefined} />
 

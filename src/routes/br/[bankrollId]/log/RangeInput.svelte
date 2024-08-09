@@ -8,20 +8,25 @@
   export let defaultEnd = new Date()
   defaultEnd.setDate(defaultStart.getDate())
 
-  export let start = defaultStart
-  export let end = defaultEnd
+  export let start: Date | undefined = defaultStart
+  export let end: Date | undefined = defaultEnd
 
   if (start === undefined) start = defaultStart
   if (end === undefined) end = defaultStart
 
-  $: addADay = end.getHours() < start.getHours()
+  $: addADay = !!start && !!end && end.getHours() < start.getHours()
 
   export function setRange(range?: Partial<{ start: Date; end: Date }> | null) {
     start = range?.start || defaultStart
     end = range?.end || defaultEnd
   }
 
-  function getDuration(_start: Date, _end: Date, _addADay: boolean): string {
+  function getDuration(
+    _start: Date | undefined,
+    _end: Date | undefined,
+    _addADay: boolean
+  ): string {
+    if (!_start || !_end) return '00:00'
     const minutes = dayjs(dayjs(_end).add(+_addADay, 'day')).diff(
       _start,
       'minutes'
@@ -46,7 +51,11 @@
     />
   -->
 
-  <input type="hidden" name="start" value="{USE_COERCE_DATE}{start.toJSON()}" />
+  <input
+    type="hidden"
+    name="start"
+    value="{USE_COERCE_DATE}{start?.toJSON()}"
+  />
   <input
     type="hidden"
     name="end"
