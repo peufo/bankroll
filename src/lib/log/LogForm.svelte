@@ -21,6 +21,8 @@
   let end = log.end || undefined
   let logType = log?.type
   let bankroll = log?.bankroll ?? $page.data.bankroll
+  let blindSmall = log?.blindSmall ?? 0
+  let blindBig = log?.blindBig ?? 0
 
   async function searchBankroll(search: string): Promise<Bankroll[]> {
     const res = await fetch(`/api/bankroll?search=${search}`)
@@ -74,14 +76,16 @@
       <InputNumber
         key="blindSmall"
         label="Small blind"
-        value={(log?.blindSmall ?? 0) / 100}
+        value={blindSmall / 100}
         input={{ step: 0.05 }}
+        on:input={(event) =>
+          (blindBig = (event.target.valueAsNumber || 0) * 200)}
       />
 
       <InputNumber
         key="blindBig"
         label="Big blind"
-        value={(log?.blindBig ?? 0) / 100}
+        value={(blindBig ?? 0) / 100}
         input={{ step: 0.05 }}
       />
     </div>
