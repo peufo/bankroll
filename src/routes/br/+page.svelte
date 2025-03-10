@@ -6,6 +6,10 @@
   <h2 class="text-lg text-center">Ajouter une bankroll</h2>
 
   <Form action="/br?/bankroll">
-    <InputText key="name" label="Nom de la bankroll" />
+    <InputText
+      key="name"
+      label="Nom de la bankroll"
+      input={{ autocomplete: 'off' }}
+    />
   </Form>
 </div>

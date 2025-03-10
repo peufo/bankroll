@@ -2,17 +2,14 @@
   import dayjs from 'dayjs'
   import 'dayjs/locale/fr-ch'
   dayjs.locale('fr-ch')
-  import { InputText, InputTime, USE_COERCE_DATE } from 'fuma'
+  import { InputDate, InputText, InputTime, USE_COERCE_DATE } from 'fuma'
 
   export let defaultStart = dayjs().subtract(2, 'hour').toDate()
   export let defaultEnd = new Date()
   defaultEnd.setDate(defaultStart.getDate())
 
-  export let start: Date | undefined = defaultStart
-  export let end: Date | undefined = defaultEnd
-
-  if (start === undefined) start = defaultStart
-  if (end === undefined) end = defaultStart
+  export let start: Date = defaultStart
+  export let end: Date = defaultEnd
 
   $: addADay = !!start && !!end && end.getHours() < start.getHours()
 
@@ -39,18 +36,6 @@
 </script>
 
 <div class="flex gap-2">
-  <!--
-    <InputDate
-      label="Date"
-      bind:value={start}
-      on:input={() => {
-        const _end = new Date(start)
-        _end.setHours(end.getHours(), end.getMinutes())
-        end = _end
-      }}
-    />
-  -->
-
   <input
     type="hidden"
     name="start"
@@ -68,10 +53,21 @@
     bind:value={end}
     hint={addADay ? 'Le jour suivant' : ''}
   />
-
   <InputText
     value={getDuration(start, end, addADay)}
     label="Durée"
     input={{ disabled: true }}
+  />
+</div>
+
+<div class="flex gap-2">
+  <InputDate
+    label="Date"
+    bind:value={start}
+    on:input={() => {
+      const _end = new Date(start)
+      _end.setHours(end.getHours(), end.getMinutes())
+      end = _end
+    }}
   />
 </div>

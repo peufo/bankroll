@@ -9,6 +9,8 @@
   import { mdiPlusMinusVariant } from '@mdi/js'
 
   export let log: Partial<Log> = { type: 'cash' }
+  let start = log.start || undefined
+  let end = log.end || undefined
 </script>
 
 <Form
@@ -34,7 +36,7 @@
     </button>
   </div>
 
-  <RangeInput start={log.start || undefined} end={log.end || undefined} />
+  <RangeInput {start} {end} />
 
   <InputSelect
     key="type"

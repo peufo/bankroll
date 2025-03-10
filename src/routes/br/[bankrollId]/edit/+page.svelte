@@ -12,6 +12,7 @@
       key="name"
       label="Nom de la bankroll"
       value={data.bankroll.name}
+      input={{ autocomplete: 'off' }}
     />
   </Form>
 </div>

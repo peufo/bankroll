@@ -8,7 +8,7 @@
   export let isClickable = false
 </script>
 
-<div class="card bg-base-300 shadow-md relative">
+<div class="card shadow-md relative">
   <div class="card-body">
     <div class="flex">
       <h2 class="card-title">{bankroll.name}</h2>
