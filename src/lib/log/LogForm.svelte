@@ -15,7 +15,6 @@
   import { modelLog } from '$lib/models'
   import { mdiPlusMinusVariant } from '@mdi/js'
   import { useApiClient } from 'fuma/api'
-  import { apiConfig } from '$lib/api'
   import { onMount } from 'svelte'
 
   export let log: Partial<Log & { bankroll?: Bankroll }> = { type: 'cash' }
@@ -24,7 +23,14 @@
 
   let banckroll = log?.bankroll ?? $page.data.bankroll
 
-  const api = useApiClient(apiConfig)
+  async function searchBankroll(search: string): Promise<Bankroll[]> {
+    const res = await fetch(`/api/bankroll?search=${search}`)
+    if (!res.ok) {
+      const { message } = await res.json()
+      throw message
+    }
+    return res.json() as Promise<Bankroll[]>
+  }
 
   let inputRelation: InputRelation<Bankroll>
 
@@ -42,11 +48,11 @@
   <InputRelation
     bind:this={inputRelation}
     key="bankroll"
-    search={api.Bankroll}
+    search={searchBankroll}
     label="Banckroll"
     slotItem={(br) => br.name}
     value={banckroll}
-  ></InputRelation>
+  />
 
   <div class="flex gap-2 items-end">
     <InputNumber key="sold" label="Solde" bind:value={log.sold} class="grow" />
