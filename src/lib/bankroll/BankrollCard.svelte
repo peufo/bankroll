@@ -9,7 +9,7 @@
 </script>
 
 <div class="card shadow-md relative">
-  <div class="card-body">
+  <div class="card-body px-2">
     <div class="flex">
       <h2 class="card-title">{bankroll.name}</h2>
       <slot name="actions" />
