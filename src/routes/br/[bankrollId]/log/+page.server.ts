@@ -11,15 +11,7 @@ export const actions = {
       const { user } = event.locals
       if (!user) error(401)
       return prisma.log.create({
-        data: {
-          ...data,
-          bankroll: {
-            connect: {
-              ownerId: user.id,
-              id: event.params.bankrollId,
-            },
-          },
-        },
+        data,
       })
     },
     {
@@ -34,7 +26,7 @@ export const actions = {
       return prisma.log.update({
         where: {
           id: data.id,
-          bankroll: { id: event.params.bankrollId, ownerId: user.id },
+          bankroll: { ownerId: user.id },
         },
         data,
       })
@@ -49,7 +41,7 @@ export const actions = {
       return prisma.log.delete({
         where: {
           id: data.id,
-          bankroll: { id: event.params.bankrollId, ownerId: user.id },
+          bankroll: { ownerId: user.id },
         },
       })
     },

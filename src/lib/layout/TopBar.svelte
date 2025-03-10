@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { Icon } from 'fuma'
   import MainMenu from './MainMenu.svelte'
+  import { mdiPlus } from '@mdi/js'
 
   export let user: import('lucia').User | null = null
 </script>
@@ -10,6 +12,10 @@
   </a>
 
   <div class="grow"></div>
+
+  <a href="/log" class="btn btn-square">
+    <Icon path={mdiPlus}></Icon>
+  </a>
 
   <MainMenu {user} />
 </div>

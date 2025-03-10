@@ -35,13 +35,13 @@
 	"dependencies": {
 		"@lucia-auth/adapter-prisma": "^4.0.1",
 		"@mdi/js": "^7.4.47",
-		"@prisma/client": "5.18.0",
+		"@prisma/client": "5.13.0",
 		"@sveltejs/adapter-node": "^5.2.0",
 		"dayjs": "^1.11.12",
-		"fuma": "^0.5.1",
+		"fuma": "^1.0.18",
 		"lucia": "^3.2.0",
 		"oslo": "^1.2.1",
-		"prisma": "^5.18.0",
+		"prisma": "^5.22.0",
 		"svelte-sonner": "^0.3.27"
 	}
 }
