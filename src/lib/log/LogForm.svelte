@@ -16,6 +16,7 @@
   import { mdiPlusMinusVariant } from '@mdi/js'
   import { useApiClient } from 'fuma/api'
   import { apiConfig } from '$lib/api'
+  import { onMount } from 'svelte'
 
   export let log: Partial<Log & { bankroll?: Bankroll }> = { type: 'cash' }
   let start = log.start || undefined
@@ -24,6 +25,13 @@
   let banckroll = log?.bankroll ?? $page.data.bankroll
 
   const api = useApiClient(apiConfig)
+
+  let inputRelation: InputRelation<Bankroll>
+
+  onMount(() => {
+    if (banckroll) return
+    inputRelation.clear()
+  })
 </script>
 
 <Form
@@ -32,12 +40,12 @@
   data={log}
 >
   <InputRelation
+    bind:this={inputRelation}
     key="bankroll"
     search={api.Bankroll}
     label="Banckroll"
     slotItem={(br) => br.name}
     value={banckroll}
-    input={{ autofocus: true }}
   ></InputRelation>
 
   <div class="flex gap-2 items-end">
