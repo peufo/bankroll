@@ -33,6 +33,8 @@
             {LOG_TYPE[log.type]}
             {#if log.type === 'tours'}
               ( {log.position || '-'} / {log.players || '-'} )
+            {:else}
+              ( {log.blindSmall || '-'} / {log.blindBig || '-'} )
             {/if}
           </span>
           <span class="text-xs opacity-70">
