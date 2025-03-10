@@ -14,7 +14,7 @@
   <div class="grow"></div>
 
   <a href="/log" class="btn btn-square">
-    <Icon path={mdiPlus}></Icon>
+    <Icon path={mdiPlus} title="Add log [Ctrl+n]"></Icon>
   </a>
 
   <MainMenu {user} />
