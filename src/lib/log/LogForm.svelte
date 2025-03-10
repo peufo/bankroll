@@ -8,20 +8,19 @@
     InputTextarea,
   } from 'fuma'
   import RangeInput from '../../routes/br/[bankrollId]/log/RangeInput.svelte'
-  import { slide } from 'svelte/transition'
+  import { fade, slide } from 'svelte/transition'
   import type { Bankroll, Log } from '@prisma/client'
   import { LOG_TYPE } from '$lib/constant'
   import { page } from '$app/stores'
   import { modelLog } from '$lib/models'
   import { mdiPlusMinusVariant } from '@mdi/js'
-  import { useApiClient } from 'fuma/api'
   import { onMount } from 'svelte'
 
   export let log: Partial<Log & { bankroll?: Bankroll }> = { type: 'cash' }
   let start = log.start || undefined
   let end = log.end || undefined
-
-  let banckroll = log?.bankroll ?? $page.data.bankroll
+  let logType = log?.type
+  let bankroll = log?.bankroll ?? $page.data.bankroll
 
   async function searchBankroll(search: string): Promise<Bankroll[]> {
     const res = await fetch(`/api/bankroll?search=${search}`)
@@ -35,7 +34,7 @@
   let inputRelation: InputRelation<Bankroll>
 
   onMount(() => {
-    if (banckroll) return
+    if (bankroll) return
     inputRelation.clear()
   })
 </script>
@@ -49,13 +48,47 @@
     bind:this={inputRelation}
     key="bankroll"
     search={searchBankroll}
-    label="Banckroll"
+    label="Bankroll"
     slotItem={(br) => br.name}
-    value={banckroll}
+    value={bankroll}
   />
 
+  <InputSelect
+    key="type"
+    label="Type"
+    options={LOG_TYPE}
+    bind:value={logType}
+  />
+
+  {#if logType === 'tours'}
+    <div class="grid grid-cols-2 gap-2" in:fade>
+      <InputNumber key="position" label="Position" value={log.position} />
+      <InputNumber
+        key="players"
+        label="Nombre de joueurs"
+        value={log.players}
+      />
+    </div>
+  {:else}
+    <div class="grid grid-cols-2 gap-2" in:fade>
+      <InputNumber
+        key="blindSmall"
+        label="Small blind"
+        value={(log?.blindSmall ?? 0) / 100}
+        input={{ step: 0.05 }}
+      />
+
+      <InputNumber
+        key="blindBig"
+        label="Big blind"
+        value={(log?.blindBig ?? 0) / 100}
+        input={{ step: 0.05 }}
+      />
+    </div>
+  {/if}
+
   <div class="flex gap-2 items-end">
-    <InputNumber key="sold" label="Solde" bind:value={log.sold} class="grow" />
+    <InputNumber key="sold" label="Solde" value={log.sold} class="grow" />
 
     <button
       type="button"
@@ -68,22 +101,5 @@
 
   <RangeInput {start} {end} />
 
-  <InputSelect
-    key="type"
-    label="Type"
-    options={LOG_TYPE}
-    bind:value={log.type}
-  />
-
-  {#if log.type === 'tours'}
-    <div class="grid grid-cols-2 gap-2" transition:slide>
-      <InputNumber key="position" label="Position" value={log.position} />
-      <InputNumber
-        key="players"
-        label="Nombre de joueurs"
-        value={log.players}
-      />
-    </div>
-  {/if}
   <InputTextarea key="comment" label="Commentaire" value={log.comment} />
 </Form>
