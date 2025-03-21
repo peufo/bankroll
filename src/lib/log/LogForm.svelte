@@ -76,7 +76,7 @@
         key="blindSmall"
         label="Small blind"
         value={blindSmall / 100}
-        input={{ step: 0.5, inputmode: 'decimal' }}
+        input={{ step: 0.05, inputmode: 'decimal' }}
         on:input={(event) =>
           (blindBig = (event.target?.valueAsNumber || 0) * 200)}
       />
@@ -85,7 +85,7 @@
         key="blindBig"
         label="Big blind"
         value={(blindBig ?? 0) / 100}
-        input={{ step: 0.5, inputmode: 'decimal' }}
+        input={{ step: 0.05, inputmode: 'decimal' }}
       />
     </div>
   {/if}
