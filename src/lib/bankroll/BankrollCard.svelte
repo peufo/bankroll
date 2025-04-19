@@ -2,9 +2,9 @@
   import type { Bankroll } from '@prisma/client'
   import { type BankrollSold, BankrollStats } from '.'
 
-  export let bankroll: Bankroll
+  export let bankroll: Pick<Bankroll, 'name'>
   export let sold: BankrollSold
-  export let isClickable = false
+  export let href = ''
 </script>
 
 <div class="card shadow-md relative">
@@ -25,7 +25,7 @@
     <slot />
   </div>
 
-  {#if isClickable}
-    <a class="absolute inset-0" href="/br/{bankroll.id}">{' '}</a>
+  {#if href}
+    <a class="absolute inset-0" {href}>{' '}</a>
   {/if}
 </div>

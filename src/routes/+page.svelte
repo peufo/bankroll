@@ -14,20 +14,28 @@
 </script>
 
 <div class="p-4 pb-20 flex flex-col gap-4 items-center">
-  <div class="flex gap-6 overflow-auto p-4">
-    <BankrollStats name="Total" value={sumOfSold('total')} />
-    <div class="border-r border-base-100" />
-    <BankrollStats name="Mois" value={sumOfSold('lastMonth')} />
-    <div class="border-r border-base-100" />
-    <BankrollStats name="Semaine" value={sumOfSold('lastWeek')} />
-  </div>
-
   <div
     class="grid gap-4 p-4 w-full"
     style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr))"
   >
+    {#if data.bankrolls.length > 1}
+      <BankrollCard
+        href="/br/all"
+        bankroll={{ name: 'Toutes les bankrolls' }}
+        sold={{
+          total: sumOfSold('total'),
+          lastMonth: sumOfSold('lastMonth'),
+          lastWeek: sumOfSold('lastWeek'),
+        }}
+      />
+    {/if}
+
     {#each data.bankrolls as bankroll}
-      <BankrollCard {bankroll} sold={data.solds[bankroll.id]} isClickable />
+      <BankrollCard
+        {bankroll}
+        sold={data.solds[bankroll.id]}
+        href="/br/{bankroll.id}"
+      />
     {/each}
   </div>
 

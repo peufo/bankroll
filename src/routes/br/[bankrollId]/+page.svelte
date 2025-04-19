@@ -15,12 +15,14 @@
 <div class="mx-auto max-w-md p-4">
   <BankrollCard bankroll={data.bankroll} sold={data.sold}>
     <div class="flex gap-2 ml-auto" slot="actions">
-      <a href="/br/{data.bankroll.id}/edit" class="btn btn-square">
-        <Icon path={mdiPencilOutline} />
-      </a>
-      <a href="/br/{data.bankroll.id}/log" class="btn btn-square">
-        <Icon path={mdiPlus} />
-      </a>
+      {#if data.bankroll.id !== 'all'}
+        <a href="/br/{data.bankroll.id}/edit" class="btn btn-square">
+          <Icon path={mdiPencilOutline} />
+        </a>
+        <a href="/br/{data.bankroll.id}/log" class="btn btn-square">
+          <Icon path={mdiPlus} />
+        </a>
+      {/if}
     </div>
 
     <div class="divider"></div>
