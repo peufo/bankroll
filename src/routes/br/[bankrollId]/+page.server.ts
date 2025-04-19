@@ -5,7 +5,9 @@ import dayjs from 'dayjs'
 import { z } from 'fuma'
 import { parseQuery } from 'fuma/server'
 
-export const load = async ({ params: { bankrollId }, url }) => {
+export const load = async ({ params: { bankrollId }, parent, url }) => {
+  const { user } = await parent()
+
   const { take, groupBy } = parseQuery(url, {
     take: z.coerce.number().default(50),
     groupBy: z.enum(['week', 'month', 'year']).optional(),
@@ -13,8 +15,9 @@ export const load = async ({ params: { bankrollId }, url }) => {
 
   const startOfWeek = dayjs().startOf('week').toDate()
   const startOfMonth = dayjs().startOf('month').toDate()
-  const where: Prisma.LogWhereInput = {}
-  if (bankrollId !== 'all') where.bankrollId = bankrollId
+  const whereAND: Prisma.LogWhereInput[] = [{ bankroll: { ownerId: user.id } }]
+  if (bankrollId !== 'all') whereAND.push({ bankrollId })
+  const where = { AND: whereAND }
   return {
     logs: await prisma.log.findMany({
       where,
