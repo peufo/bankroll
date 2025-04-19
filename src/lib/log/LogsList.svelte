@@ -3,11 +3,7 @@
   import { renderAmount } from '$lib/utils'
   import type { Log } from '@prisma/client'
   import dayjs from 'dayjs'
-  import relativeTime from 'dayjs/plugin/relativeTime'
-  import 'dayjs/locale/fr-ch'
   import { urlParam } from 'fuma'
-  dayjs.locale('fr-ch')
-  dayjs.extend(relativeTime)
 
   export let logs: Log[]
   export let logCount: number
@@ -19,6 +15,14 @@
       .map((n) => n.toString().padStart(2, '0'))
       .join(':')
   }
+
+  const formatDate = Intl.DateTimeFormat('fr-ch', {
+    day: 'numeric',
+    month: 'numeric',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
 </script>
 
 <div class="flex flex-col gap-4">
@@ -39,7 +43,7 @@
           </span>
           <span class="text-xs opacity-70">
             {#if log.start}
-              {dayjs().to(log.start)}
+              {formatDate.format(log.start)}
             {/if}
 
             {#if log.start && log.end}
