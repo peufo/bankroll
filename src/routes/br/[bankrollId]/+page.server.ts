@@ -1,5 +1,5 @@
 import type { Prisma } from '@prisma/client'
-import type { LogsGroup } from '$lib/log'
+import type { LogsGroup, LogsGroupBy } from '$lib/log'
 import { prisma } from '$lib/server/prisma.js'
 import dayjs from 'dayjs'
 import { z } from 'fuma'
@@ -10,7 +10,7 @@ export const load = async ({ params: { bankrollId }, parent, url }) => {
 
   const { take, groupBy } = parseQuery(url, {
     take: z.coerce.number().default(50),
-    groupBy: z.enum(['week', 'month', 'year']).optional(),
+    groupBy: z.enum(['day', 'week', 'month', 'year']).optional(),
   })
 
   const startOfWeek = dayjs().startOf('week').toDate()
@@ -48,7 +48,7 @@ export const load = async ({ params: { bankrollId }, parent, url }) => {
 // On verra plus tard la pagination et l'optimisation
 async function getLogsGroups(
   where: Prisma.LogWhereInput,
-  groupBy: 'week' | 'month' | 'year' | undefined
+  groupBy?: LogsGroupBy
 ): Promise<LogsGroup[]> {
   if (groupBy === undefined) return []
 

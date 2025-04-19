@@ -9,4 +9,4 @@ export type LogsGroup = {
   logsCount: number
 }
 
-export type LogsGroupBy = 'year' | 'month' | 'week'
+export type LogsGroupBy = 'day' | 'year' | 'month' | 'week'

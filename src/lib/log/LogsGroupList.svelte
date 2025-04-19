@@ -11,6 +11,7 @@
   export let groupBy: LogsGroupBy
 
   const dayjsFormat: Record<LogsGroupBy, (d: Date) => string> = {
+    day: (d) => dayjs(d).format('dddd DD MMMM YYYY'),
     year: (d) => dayjs(d).format('[Année] YYYY'),
     month: (d) => dayjs(d).format('MMMM YYYY'),
     week: (d) => `Semaine ${dayjs(d).isoWeek()}`,

@@ -2,6 +2,7 @@
   import { urlParam } from 'fuma'
 
   const groups = [
+    { key: 'day', label: 'Jour' },
     { key: 'week', label: 'Semaine' },
     { key: 'month', label: 'Mois' },
     { key: 'year', label: 'Année' },
