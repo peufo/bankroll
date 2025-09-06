@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "prestart": "prisma migrate deploy && prisma generate",
     "start": "node ./build/index.js",
     "dev": "vite dev",
     "build": "vite build",
@@ -12,8 +13,7 @@
     "lint": "eslint .",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
-    "studio": "prisma studio",
-    "postinstall": "prisma migrate deploy && prisma generate"
+    "studio": "prisma studio"
   },
   "devDependencies": {
     "@sveltejs/kit": "^2.0.0",
